@@ -1,8 +1,9 @@
 name: .NET Core
 
 on:
-
-   Workflow_dispatch
+  push:
+    branches: [ main ]
+   #Workflow_dispatch
   #release:
     # Only use the types keyword to narrow down the activity types that will trigger your workflow.
     #types: [published]
@@ -26,10 +27,10 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
 
-    - name: Publish to NuGet
-      uses: brandedoutcast/publish-nuget@v2
-      with:
-        PROJECT_FILE_PATH: Hangfire.Extensions.ApplicationInsights/Hangfire.Extensions.ApplicationInsights.csproj
-        VERSION_REGEX: '^\s*<Version>(.*)<\/Version>\s*$'
-        TAG_FORMAT: '*'
-        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+   # - name: Publish to NuGet
+   #   uses: brandedoutcast/publish-nuget@v2
+   #   with:
+   #     PROJECT_FILE_PATH: Hangfire.Extensions.ApplicationInsights/Hangfire.Extensions.ApplicationInsights.csproj
+   #     VERSION_REGEX: '^\s*<Version>(.*)<\/Version>\s*$'
+   #     TAG_FORMAT: '*'
+   #     NUGET_KEY: ${{secrets.NUGET_API_KEY}}
