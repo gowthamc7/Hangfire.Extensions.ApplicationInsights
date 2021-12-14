@@ -1,6 +1,7 @@
 name: .NET Core
 
 on:
+
    Workflow_dispatch
   #release:
     # Only use the types keyword to narrow down the activity types that will trigger your workflow.
