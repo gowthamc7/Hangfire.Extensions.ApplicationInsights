@@ -24,6 +24,8 @@ jobs:
         run: | 
           dotnet tool install --global dotnet-sonarscanner
           dotnet sonarscanner begin /k:Hangfire.Extensions.ApplicationInsights /d:sonar.login=${{ secrets.SONAR_TOKEN }}
+        env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} 
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
