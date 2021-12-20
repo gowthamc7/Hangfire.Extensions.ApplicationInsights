@@ -19,21 +19,31 @@ jobs:
   
       - name: Install dependencies
         run: dotnet restore
-    
+   
+      - name: Sonarqube Begin
+        run: | 
+          dotnet tool install --global dotnet-sonarscanner
+          dotnet sonarscanner begin /k:Hangfire.Extensions.ApplicationInsights /d:sonar.login=${{ secrets.SONAR_TOKEN }} /s:$GITHUB_WORKSPACE/
+
       - name: Build
         run: dotnet build --configuration Release --no-restore
-   
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: sonarsource/sonarqube-scan-action@master
-        with:
-         projectBaseDir: Hangfire.Extensions.ApplicationInsights/
-         args: >
-          -Dsonar.projectKey=Hangfire.Extensions.ApplicationInsights       
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+ 
+      - name: Sonarqube end
+        run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
+ 
+#      - uses: actions/checkout@v2
+ #       with:
+#          fetch-depth: 0
+#      - uses: sonarsource/sonarqube-scan-action@master
+#        with:
+#         projectBaseDir: Hangfire.Extensions.ApplicationInsights/
+#         args: >
+#          -Dsonar.projectKey=Hangfire.Extensions.ApplicationInsights       
+#        env:
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       # If you wish to fail your job when the Quality Gate is red, uncomment the
       # following lines. This would typically be used to fail a deployment.
       # We do not recommend to use this in a pull request. Prefer using pull request
