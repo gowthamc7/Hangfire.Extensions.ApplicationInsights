@@ -6,6 +6,9 @@ using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
+using System.Net.Mail;
 
 namespace Hangfire.Extensions.ApplicationInsights
 {
