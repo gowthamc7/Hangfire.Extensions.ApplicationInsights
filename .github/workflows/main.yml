@@ -23,7 +23,7 @@ jobs:
       - name: Sonarqube Begin
         run: | 
           dotnet tool install --global dotnet-sonarscanner
-          dotnet sonarscanner begin /k:Hangfire.Extensions.ApplicationInsights /d:sonar.login=${{ secrets.SONAR_TOKEN }} /s:$GITHUB_WORKSPACE/
+          dotnet sonarscanner begin /k:Hangfire.Extensions.ApplicationInsights /d:sonar.login=${{ secrets.SONAR_TOKEN }}
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
